@@ -1,5 +1,4 @@
 const Task = require("../models/Task");
-const asyncWrapper = require("../middleware/async");
 const asyncHandler = require("express-async-handler");
 
 const getAllTasks = asyncHandler(async (req, res) => {
@@ -45,7 +44,7 @@ const updateTask = asyncHandler(async (req, res) => {
   res.status(200).json({ success: true, task });
 });
 
-const deleteTask = asyncWrapper(async (req, res) => {
+const deleteTask = asyncHandler(async (req, res) => {
   const taskID = req.params.id;
   const deletedTask = await Task.findByIdAndDelete(taskID);
 
